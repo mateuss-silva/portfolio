@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mateus Silva | Mobile & Frontend Developer</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/your-kit-code.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Placeholder for FontAwesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body class="dark-theme">
+    <header class="navbar">
+      <div class="container">
+        <div class="logo">MS<span>.</span></div>
+        <nav>
+          <ul class="nav-links">
+            <li><a href="#home" data-i18n="nav_home">Início</a></li>
+            <li><a href="#about" data-i18n="nav_about">Sobre</a></li>
+            <li><a href="#projects" data-i18n="nav_projects">Projetos</a></li>
+            <li><a href="#contact" data-i18n="nav_contact">Contato</a></li>
+          </ul>
+        </nav>
+        <div class="controls">
+          <button id="lang-toggle" class="btn-secondary">EN</button>
+        </div>
+      </div>
+    </header>
+
+    <section id="home" class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <h2 data-i18n="hero_subtitle">
+            Especialista em Desenvolvimento Mobile e Frontend
+          </h2>
+          <h1 data-i18n="hero_title">Mateus Silva</h1>
+          <p data-i18n="hero_description">
+            Construindo experiências mobile de alta qualidade e escaláveis com
+            Flutter, Swift e Kotlin.
+          </p>
+          <div class="hero-btns">
+            <a href="#projects" class="btn-primary" data-i18n="nav_projects"
+              >Projetos</a
+            >
+            <a href="#contact" class="btn-secondary" data-i18n="nav_contact"
+              >Contato</a
+            >
+          </div>
+        </div>
+        <div class="hero-visual">
+          <!-- Decorative element or image placeholder -->
+          <div class="blob"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="about section">
+      <div class="container">
+        <h2 class="section-title" data-i18n="about_title">Sobre Mim</h2>
+        <div class="about-grid">
+          <div class="about-text">
+            <p data-i18n="about_text">
+              Sou um desenvolvedor apaixonado por tecnologia, com foco principal
+              em Desenvolvimento Mobile e Back-end. Meu objetivo é sempre
+              aprimorar minhas stacks e entregar soluções de alta qualidade e
+              escaláveis.
+            </p>
+            <p data-i18n="about_edu">
+              Graduado em Ciência da Computação pela UFS.
+            </p>
+          </div>
+          <div class="skills-container">
+            <h3 data-i18n="skills_title">Tecnologias</h3>
+            <div class="skills-grid">
+              <div class="skill-item">
+                <i class="fab fa-flutter"></i> Flutter
+              </div>
+              <div class="skill-item">
+                <i class="fab fa-apple"></i> Swift (iOS)
+              </div>
+              <div class="skill-item">
+                <i class="fab fa-android"></i> Kotlin (Android)
+              </div>
+              <div class="skill-item"><i class="fas fa-code"></i> Dart</div>
+              <div class="skill-item">
+                <i class="fas fa-terminal"></i> .NET / C#
+              </div>
+              <div class="skill-item">
+                <i class="fab fa-react"></i> React / Web
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="projects section">
+      <div class="container">
+        <h2 class="section-title" data-i18n="projects_title">
+          Projetos em Destaque
+        </h2>
+        <div class="projects-grid">
+          <!-- Project 1: AI Assistant -->
+          <div class="project-card">
+            <div class="project-info">
+              <h3>ai_assistant</h3>
+              <p data-i18n="project_ai_desc">
+                Assistente inteligente baseado em IA, explorando integrações
+                modernas e LLMs.
+              </p>
+              <a
+                href="https://github.com/mateuss-silva/ai_assistant"
+                target="_blank"
+                class="project-link"
+              >
+                <span data-i18n="view_project">Ver Projeto</span>
+                <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+          <!-- Project 2: O Que Assistir -->
+          <div class="project-card">
+            <div class="project-info">
+              <h3>o-que-assistir</h3>
+              <p data-i18n="project_watch_desc">
+                Aplicativo completo de catálogo e avaliações de filmes e séries.
+              </p>
+              <a
+                href="https://github.com/mateuss-silva/o-que-assistir"
+                target="_blank"
+                class="project-link"
+              >
+                <span data-i18n="view_project">Ver Projeto</span>
+                <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+          <!-- Project 3: Fake Store -->
+          <div class="project-card">
+            <div class="project-info">
+              <h3>fake-store</h3>
+              <p data-i18n="project_store_desc">
+                Implementação de uma loja virtual consumindo APIs REST, com foco
+                em UI/UX e gerenciamento de estado.
+              </p>
+              <a
+                href="https://github.com/mateuss-silva/fake-store"
+                target="_blank"
+                class="project-link"
+              >
+                <span data-i18n="view_project">Ver Projeto</span>
+                <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+          <!-- Project 4: Catalogo Receitas -->
+          <div class="project-card">
+            <div class="project-info">
+              <h3>catalogo-receitas</h3>
+              <p data-i18n="project_recipes_desc">
+                Aplicativo interativo de receitas, demonstrando organização de
+                código e persistência.
+              </p>
+              <a
+                href="https://github.com/mateuss-silva/catalogo-receitas"
+                target="_blank"
+                class="project-link"
+              >
+                <span data-i18n="view_project">Ver Projeto</span>
+                <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer id="contact" class="footer">
+      <div class="container">
+        <h2 data-i18n="contact_title">Vamos nos conectar?</h2>
+        <p data-i18n="contact_text">
+          Sinta-se à vontade para entrar em contato comigo para discutir sobre
+          tecnologia, parcerias ou oportunidades!
+        </p>
+        <div class="social-links">
+          <a href="https://github.com/mateuss-silva" target="_blank"
+            ><i class="fab fa-github"></i
+          ></a>
+          <a
+            href="https://www.linkedin.com/in/mateus-silva-a6030b160/"
+            target="_blank"
+            ><i class="fab fa-linkedin"></i
+          ></a>
+        </div>
+        <p class="copyright">&copy; 2026 Mateus Silva. Built with passion.</p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
