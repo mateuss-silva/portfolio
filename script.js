@@ -57,6 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
             "p_code_label": "Implementation Strategy",
             "p_back": "Back to Home",
             "p_view_code": "View Source Code",
+            "p_demo_label": "Interactive Demo",
 
             "projects_details": {
                 "ai": {
@@ -66,8 +67,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     "state": "Riverpod (Asynchronous Data Handling)",
                     "patterns": "MVVM, Repository, DTOs, SOLID, MethodChannels",
                     "github": "https://github.com/mateuss-silva/ai_assistant",
+                    "demo_url": "https://mateuss-silva.github.io/ai_assistant/",
                     "description": "A sophisticated security tool designed to protect users in the financial sector by analyzing SMS and Email patterns for fraud using hybrid intelligence. The main challenge was balancing high-performance analysis with ironclad user privacy.",
-                    "tech_details": "Implemented an 'Offline-First' strategy where primary analysis happens locally on the device. Utilized MethodChannels to bridge Flutter with high-performance native modules: Kotlin with Coroutines for Android and Swift with Combine for iOS. This architecture ensures low latency and maximum reliability in critical scenarios.",
+                    "tech_details": "The system was designed to solve the trade-off between <strong>total privacy</strong> and <strong>cloud processing power</strong>, using a <strong>Hybrid Intelligence</strong> strategy:<br><br><ul><li><strong>On-Device Machine Learning:</strong> On Android, I implemented local inference via <strong>TensorFlow Lite</strong>. The differentiator is the custom model that embeds <strong>Text Vectorization</strong> logic, allowing natural language processing to occur without external dependencies, ensuring zero latency and sensitive data privacy.</li><li><strong>High-Performance Native Bridge:</strong> I used <strong>MethodChannels</strong> for optimized bidirectional communication. On Android, the native code uses <strong>Kotlin Coroutines and StateFlow</strong> for asynchronous reactivity. On iOS, I adopted the <strong>Combine Framework</strong>, demonstrating proficiency in modern native stacks for background processing.</li><li><strong>Intelligent Fallback (DevSecOps):</strong> In cases of high complexity, the system automatically scales to <strong>Google Gemini 2.5 Flash</strong>. This transition is managed by a robust data layer that uses <strong>Riverpod</strong> for reactivity and <strong>GitHub Secrets</strong> to ensure that sensitive credentials never touch the public file system, an essential <strong>DevSecOps</strong> practice.</li><li><strong>Clean Architecture (Clean Arch):</strong> Strict separation of concerns between Entity, UseCase, and Repository layers, facilitating unit testing with <strong>Mocktail</strong> and ensuring the business core remains framework-agnostic.</li></ul>",
                     "code_snippet": "/// Notifier for managing analysis state (using Riverpod)\nclass AnalysisNotifier extends StateNotifier<AnalysisState> {\n  final Ref _ref;\n  AnalysisNotifier(this._ref) : super(const AnalysisInitial());\n\n  Future<void> analyze(String message) async {\n    state = const AnalysisLoading();\n    final useCase = _ref.read(analyzeMessageUseCaseProvider);\n    final result = await useCase.execute(message);\n\n    state = result.fold(\n      (failure) => AnalysisError(failure),\n      (analysis) => AnalysisSuccess(analysis),\n    );\n  }\n}",
                     "images": [
                         "https://raw.githubusercontent.com/mateuss-silva/ai_assistant/master/screenshots/Screenshot_idle.png",
@@ -169,6 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
             "p_code_label": "Estratégia de Implementação",
             "p_back": "Voltar para Início",
             "p_view_code": "Ver Código Fonte",
+            "p_demo_label": "Demo Interativa",
 
             "projects_details": {
                 "ai": {
@@ -178,8 +181,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     "state": "Riverpod (Asynchronous Data Handling)",
                     "patterns": "MVVM, Repository, DTOs, SOLID, MethodChannels",
                     "github": "https://github.com/mateuss-silva/ai_assistant",
+                    "demo_url": "https://mateuss-silva.github.io/ai_assistant/",
                     "description": "Uma ferramenta de segurança sofisticada projetada para proteger usuários no setor financeiro, analisando padrões de SMS e E-mail em busca de fraudes usando inteligência híbrida. O principal desafio foi equilibrar a análise de alta performance com a privacidade total do usuário.",
-                    "tech_details": "Implementada uma estratégia 'Offline-First' onde a análise primária ocorre localmente no dispositivo. Utilizei MethodChannels para conectar o Flutter a módulos nativos de alta performance: Kotlin com Coroutines no Android e Swift com Combine no iOS. Esta arquitetura garante baixa latência e máxima confiabilidade em cenários críticos.",
+                    "tech_details": "O sistema foi concebido para resolver o trade-off entre <strong>privacidade total</strong> e <strong>poder de processamento em nuvem</strong>, utilizando uma estratégia de <strong>Inteligência Híbrida</strong>:<br><br><ul><li><strong>Machine Learning On-Device:</strong> No Android, implementei a inferência local via <strong>TensorFlow Lite</strong>. O diferencial está no modelo customizado que embarca a lógica de <strong>Text Vectorization</strong>, permitindo que o processamento de linguagem natural ocorra sem dependências externas, garantindo latência zero e privacidade de dados sensíveis.</li><li><strong>Ponte Nativa de Alta Performance:</strong> Utilizei <strong>MethodChannels</strong> para comunicação bidirecional otimizada. No Android, o código nativo faz uso de <strong>Kotlin Coroutines e StateFlow</strong> para reatividade assíncrona. No iOS, adotei o <strong>Combine Framework</strong>, demonstrando proficiência em stacks nativas modernas para processamento em background.</li><li><strong>Fallback Inteligente (DevSecOps):</strong> Em casos de alta complexidade, o sistema escala automaticamente para o <strong>Google Gemini 2.5 Flash</strong>. Esta transição é gerenciada por uma camada de dados robusta que utiliza <strong>Riverpod</strong> para reatividade e <strong>GitHub Secrets</strong> para garantir que credenciais sensíveis nunca toquem o sistema de arquivos público, uma prática essencial de <strong>DevSecOps</strong>.</li><li><strong>Arquitetura Limpa (Clean Arch):</strong> Separação rigorosa de interesses entre camadas de Entidade, UseCase e Repositório, facilitando a testabilidade unitária com <strong>Mocktail</strong> e garantindo que o núcleo do negócio seja agnóstico a frameworks.</li></ul>",
                     "code_snippet": "// Monitorando o estado da análise com Riverpod\nclass AnalysisNotifier extends StateNotifier<AnalysisState> {\n  final Ref _ref;\n  AnalysisNotifier(this._ref) : super(const AnalysisInitial());\n\n  /// Analisa uma mensagem para detectar fraude\n  Future<void> analyze(String message) async {\n    state = const AnalysisLoading();\n    final useCase = _ref.read(analyzeMessageUseCaseProvider);\n    final result = await useCase.execute(message);\n\n    state = result.fold(\n      (failure) => AnalysisError(failure),\n      (analysis) => AnalysisSuccess(analysis),\n    );\n  }\n}",
                     "images": [
                         "https://raw.githubusercontent.com/mateuss-silva/ai_assistant/master/screenshots/Screenshot_idle.png",
@@ -252,8 +256,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('p-architecture').textContent = project.arch;
         document.getElementById('p-state').textContent = project.state;
         document.getElementById('p-patterns').textContent = project.patterns;
-        document.getElementById('p-description').textContent = project.description;
-        document.getElementById('p-technical-details').textContent = project.tech_details;
+        document.getElementById('p-description').innerHTML = project.description;
+        document.getElementById('p-technical-details').innerHTML = project.tech_details;
         document.getElementById('p-code').textContent = project.code_snippet;
         
         // Update GitHub Link
@@ -261,6 +265,19 @@ document.addEventListener('DOMContentLoaded', () => {
         if (githubBtn && project.github) {
             githubBtn.href = project.github;
             githubBtn.style.display = 'inline-flex';
+        }
+
+        // Update Demo Embed
+        const demoSection = document.getElementById('p-demo-section');
+        const demoIframe = document.getElementById('p-demo-iframe');
+        if (demoSection && demoIframe) {
+            if (project.demo_url) {
+                demoIframe.src = project.demo_url;
+                demoSection.style.display = 'block';
+            } else {
+                demoIframe.src = '';
+                demoSection.style.display = 'none';
+            }
         }
 
         // Multiple Image Support (Gallery)
