@@ -5,20 +5,33 @@
     "nav_projects": "Projects",
     "nav_contact": "Contact",
     "hero_title": "Mateus Silva",
-    "hero_subtitle": "Mobile & Frontend Developer Specialist",
-    "hero_description": "Building high-quality, scalable mobile experiences with Flutter, Swift, and Kotlin.",
+    "hero_subtitle": "Senior Mobile Engineer | Flutter Specialist",
+    "hero_description": "Architecting high-performance, scalable mobile experiences with Flutter, Kotlin, and Swift.",
     "about_title": "About Me",
-    "about_text": "I am a developer passionate about technology, with a primary focus on Mobile and Back-end development. My goal is always to improve my stacks and deliver high-quality, scalable solutions.",
+    "about_text": "Senior Mobile Engineer specialized in Flutter with a deep foundation in native iOS and Android development. I have a proven track record of delivering high-performance applications across various industries, including solid experience in the international financial market. I master reactive programming and Clean Architecture to build robust, scalable products that solve complex business challenges with technical excellence.",
     "about_edu": "Graduated in Computer Science from UFS.",
-    "skills_title": "Tech Stack",
-    "projects_title": "Featured Projects",
-    "project_ai_desc": "Intelligent assistant based on AI, exploring modern integrations and LLMs.",
-    "project_watch_desc": "Complete app for cataloging and reviewing movies and series.",
-    "project_store_desc": "Virtual store implementation consuming REST APIs, focusing on UI/UX and state management.",
-    "project_recipes_desc": "Interactive recipes app, demonstrating code organization and persistence.",
-    "contact_title": "Get in Touch",
-    "contact_text": "Feel free to reach out to discuss technology, partnerships, or opportunities!",
-    "view_project": "View Project"
+    "skills_title": "Core Expertise",
+    "projects_title": "Strategic Projects",
+    
+    "project_ai_title": "AI Financial Assistant",
+    "project_ai_desc": "Hybrid intelligence security assistant for SMS/Email analysis. Features an offline-first strategy to ensure user privacy, utilizing local processing before cloud fallback.",
+    "project_ai_tech": "Clean Architecture | Riverpod | MethodChannels (Swift/Kotlin) | Offline-First",
+    
+    "project_watch_title": "Movie Catalog (TMDB)",
+    "project_watch_desc": "High-performance theater/streaming catalog. Developed following strict quality standards to ensure a decoupled and maintainable codebase.",
+    "project_watch_tech": "Clean Architecture | MobX | TDD (Unit Tests) | TMDB API | Flutter 3.10+",
+    
+    "project_store_title": "Fake Store E-commerce",
+    "project_store_desc": "Full e-commerce implementation demonstrating UI/UX patterns and reactive state management without heavy dependencies.",
+    "project_store_tech": "Clean Architecture | ValueNotifier | State Pattern | REST API Integration",
+    
+    "project_recipes_title": "Smart Recipes App",
+    "project_recipes_desc": "Interactive recipes platform with real-time sync and robust dependency injection for scalability.",
+    "project_recipes_tech": "MVC Pattern | MobX | Flutter Modular (DI & Routing) | Firebase (Realtime & Cloud Storage)",
+    
+    "contact_title": "Let's Build Something Great",
+    "contact_text": "Available for strategic technical discussions, high-impact collaborations, or new professional challenges.",
+    "view_project": "Technical Deep Dive"
   },
   "pt": {
     "nav_home": "Início",
@@ -26,19 +39,32 @@
     "nav_projects": "Projetos",
     "nav_contact": "Contato",
     "hero_title": "Mateus Silva",
-    "hero_subtitle": "Especialista em Desenvolvimento Mobile e Frontend",
-    "hero_description": "Construindo experiências mobile de alta qualidade e escaláveis com Flutter, Swift e Kotlin.",
+    "hero_subtitle": "Engenheiro Mobile Sênior | Especialista Flutter",
+    "hero_description": "Arquitetando experiências mobile de alta performance e escala com Flutter, Kotlin e Swift.",
     "about_title": "Sobre Mim",
-    "about_text": "Sou um desenvolvedor apaixonado por tecnologia, com foco principal em Desenvolvimento Mobile e Back-end. Meu objetivo é sempre aprimorar minhas stacks e entregar soluções de alta qualidade e escaláveis.",
+    "about_text": "Engenheiro Mobile Sênior especialista em Flutter com sólida experiência em desenvolvimento nativo iOS e Android. Possuo uma trajetória consolidada na entrega de aplicações de alta performance em diversos setores, incluindo sólida experiência no mercado financeiro internacional. Domino programação reativa e Clean Architecture para construir produtos robustos e escaláveis, focando sempre na excelência técnica e na resolução de desafios de negócio complexos.",
     "about_edu": "Graduado em Ciência da Computação pela UFS.",
-    "skills_title": "Tecnologias",
-    "projects_title": "Projetos em Destaque",
-    "project_ai_desc": "Assistente inteligente baseado em IA, explorando integrações modernas e LLMs.",
-    "project_watch_desc": "Aplicativo completo de catálogo e avaliações de filmes e séries.",
-    "project_store_desc": "Implementação de uma loja virtual consumindo APIs REST, com foco em UI/UX e gerenciamento de estado.",
-    "project_recipes_desc": "Aplicativo interativo de receitas, demonstrando organização de código e persistência.",
-    "contact_title": "Vamos nos conectar?",
-    "contact_text": "Sinta-se à vontade para entrar em contato comigo para discutir sobre tecnologia, parcerias ou oportunidades!",
-    "view_project": "Ver Projeto"
+    "skills_title": "Especialidades Core",
+    "projects_title": "Projetos Estratégicos",
+    
+    "project_ai_title": "Assistente Financeiro IA",
+    "project_ai_desc": "Assistente de segurança com inteligência híbrida para análise de SMS/Emails. Estratégia offline-first para privacidade total, processando dados localmente.",
+    "project_ai_tech": "Clean Architecture | Riverpod | MethodChannels (Swift/Kotlin) | Offline-First",
+    
+    "project_watch_title": "Catálogo de Filmes (TMDB)",
+    "project_watch_desc": "Catálogo de alta performance para cinema e streaming. Desenvolvido sob rigorosos padrões de qualidade para um código desacoplado.",
+    "project_watch_tech": "Clean Architecture | MobX | TDD (Testes Unitários) | TMDB API | Flutter 3.10+",
+    
+    "project_store_title": "E-commerce Fake Store",
+    "project_store_desc": "Implementação completa de e-commerce focada em padrões de UI/UX e gerenciamento de estado reativo otimizado.",
+    "project_store_tech": "Clean Architecture | ValueNotifier | State Pattern | Integração API REST",
+    
+    "project_recipes_title": "Catálogo de Receitas",
+    "project_recipes_desc": "Plataforma interativa de receitas com sincronização em tempo real e injeção de dependências robusta para escalabilidade.",
+    "project_recipes_tech": "MVC Pattern | MobX | Flutter Modular (DI & Routing) | Firebase (Database & Storage)",
+    
+    "contact_title": "Vamos Construir Algo Incrível?",
+    "contact_text": "Disponível para discussões técnicas estratégicas, colaborações de alto impacto ou novos desafios profissionais.",
+    "view_project": "Detalhes Técnicos"
   }
 }

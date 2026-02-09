@@ -11,11 +11,6 @@
       href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap"
       rel="stylesheet"
     />
-    <script
-      src="https://kit.fontawesome.com/your-kit-code.js"
-      crossorigin="anonymous"
-    ></script>
-    <!-- Placeholder for FontAwesome -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -34,7 +29,7 @@
           </ul>
         </nav>
         <div class="controls">
-          <button id="lang-toggle" class="btn-secondary">EN</button>
+          <button id="lang-toggle" class="btn-secondary">English</button>
         </div>
       </div>
     </header>
@@ -85,7 +80,10 @@
             <h3 data-i18n="skills_title">Tecnologias</h3>
             <div class="skills-grid">
               <div class="skill-item">
-                <i class="fab fa-flutter"></i> Flutter
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: block; margin: 0 auto 0.5rem; color: var(--secondary-color);">
+                  <path d="M14.3162 10.3897L21.4324 3.27351H14.3162L10.7581 6.83161L14.3162 10.3897ZM14.3162 20.7265H21.4324L10.7581 10.0521L3.64185 17.1684L7.2 20.7265L10.7581 17.1684L14.3162 20.7265Z" fill="currentColor"/>
+                </svg>
+                Flutter
               </div>
               <div class="skill-item">
                 <i class="fab fa-apple"></i> Swift (iOS)
@@ -115,17 +113,17 @@
           <!-- Project 1: AI Assistant -->
           <div class="project-card">
             <div class="project-info">
-              <h3>ai_assistant</h3>
+              <h3 data-i18n="project_ai_title">Assistente Financeiro IA</h3>
               <p data-i18n="project_ai_desc">
-                Assistente inteligente baseado em IA, explorando integrações
-                modernas e LLMs.
+                Assistente de segurança com inteligência híbrida para análise de SMS/Emails. Estratégia offline-first para privacidade total, processando dados localmente.
               </p>
+              <div class="tech-tags" data-i18n="project_ai_tech">Clean Architecture | Riverpod | MethodChannels (Swift/Kotlin) | Offline-First</div>
               <a
                 href="https://github.com/mateuss-silva/ai_assistant"
                 target="_blank"
                 class="project-link"
               >
-                <span data-i18n="view_project">Ver Projeto</span>
+                <span data-i18n="view_project">Ver Código</span>
                 <i class="fas fa-arrow-right"></i>
               </a>
             </div>
@@ -133,16 +131,17 @@
           <!-- Project 2: O Que Assistir -->
           <div class="project-card">
             <div class="project-info">
-              <h3>o-que-assistir</h3>
+              <h3 data-i18n="project_watch_title">Catálogo de Filmes (TMDB)</h3>
               <p data-i18n="project_watch_desc">
-                Aplicativo completo de catálogo e avaliações de filmes e séries.
+                Catálogo de alta performance para cinema e streaming. Desenvolvido sob rigorosos padrões de qualidade para um código desacoplado.
               </p>
+              <div class="tech-tags" data-i18n="project_watch_tech">Clean Architecture | TDD (Testes Unitários) | TMDB API | Flutter 3.10+</div>
               <a
                 href="https://github.com/mateuss-silva/o-que-assistir"
                 target="_blank"
                 class="project-link"
               >
-                <span data-i18n="view_project">Ver Projeto</span>
+                <span data-i18n="view_project">Ver Código</span>
                 <i class="fas fa-arrow-right"></i>
               </a>
             </div>
@@ -150,17 +149,17 @@
           <!-- Project 3: Fake Store -->
           <div class="project-card">
             <div class="project-info">
-              <h3>fake-store</h3>
+              <h3 data-i18n="project_store_title">E-commerce Fake Store</h3>
               <p data-i18n="project_store_desc">
-                Implementação de uma loja virtual consumindo APIs REST, com foco
-                em UI/UX e gerenciamento de estado.
+                Implementação completa de e-commerce focada em padrões avançados de UI/UX e gerenciamento de estado reativo otimizado.
               </p>
+              <div class="tech-tags" data-i18n="project_store_tech">Clean Architecture | ValueNotifier | State Pattern | Integração API REST</div>
               <a
                 href="https://github.com/mateuss-silva/fake-store"
                 target="_blank"
                 class="project-link"
               >
-                <span data-i18n="view_project">Ver Projeto</span>
+                <span data-i18n="view_project">Ver Código</span>
                 <i class="fas fa-arrow-right"></i>
               </a>
             </div>
@@ -168,17 +167,17 @@
           <!-- Project 4: Catalogo Receitas -->
           <div class="project-card">
             <div class="project-info">
-              <h3>catalogo-receitas</h3>
+              <h3 data-i18n="project_recipes_title">Catálogo de Receitas</h3>
               <p data-i18n="project_recipes_desc">
-                Aplicativo interativo de receitas, demonstrando organização de
-                código e persistência.
+                Plataforma interativa de receitas com sincronização em tempo real e injeção de dependências robusta para escalabilidade.
               </p>
+              <div class="tech-tags" data-i18n="project_recipes_tech">MVC Pattern | MobX | Flutter Modular (DI & Routing) | Firebase (Database & Storage)</div>
               <a
                 href="https://github.com/mateuss-silva/catalogo-receitas"
                 target="_blank"
                 class="project-link"
               >
-                <span data-i18n="view_project">Ver Projeto</span>
+                <span data-i18n="view_project">Ver Código</span>
                 <i class="fas fa-arrow-right"></i>
               </a>
             </div>

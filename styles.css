@@ -138,6 +138,7 @@ body {
   margin-bottom: 1.5rem;
   background: var(--accent-gradient);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -264,13 +265,25 @@ body {
 
 .project-card h3 {
   font-size: 1.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
 }
 
 .project-card p {
   color: var(--text-secondary);
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
   flex-grow: 1;
+}
+
+.tech-tags {
+  font-size: 0.8rem;
+  color: var(--secondary-color);
+  margin-bottom: 2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  opacity: 0.8;
 }
 
 .project-link {
@@ -280,6 +293,7 @@ body {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  margin-top: auto;
 }
 
 /* Footer & Contact */

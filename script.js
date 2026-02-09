@@ -2,34 +2,89 @@ document.addEventListener('DOMContentLoaded', () => {
     const langToggle = document.getElementById('lang-toggle');
     let currentLang = 'pt'; // Default language
 
-    // i18n Logic
-    const loadLanguage = async (lang) => {
-        try {
-            const response = await fetch('languages.json');
-            const translations = await response.json();
-            
-            document.querySelectorAll('[data-i18n]').forEach(element => {
-                const key = element.getAttribute('data-i18n');
-                if (translations[lang][key]) {
-                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-                        element.placeholder = translations[lang][key];
-                    } else {
-                        element.textContent = translations[lang][key];
-                    }
-                }
-            });
-
-            // Update HTML lang attribute
-            document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
-            // Update button text
-            langToggle.textContent = lang === 'pt' ? 'EN' : 'PT';
-            currentLang = lang;
-            
-            // Save preference
-            localStorage.setItem('preferred-lang', lang);
-        } catch (error) {
-            console.error('Error loading translations:', error);
+    // Embedded Translations to avoid CORS issues when opening index.html directly
+    const translations = {
+        "en": {
+            "nav_home": "Home",
+            "nav_about": "About",
+            "nav_projects": "Projects",
+            "nav_contact": "Contact",
+            "hero_title": "Mateus Silva",
+            "hero_subtitle": "Senior Mobile Engineer | Flutter Specialist",
+            "hero_description": "Architecting high-performance, scalable mobile experiences with Flutter, Kotlin, and Swift.",
+            "about_title": "About Me",
+            "about_text": "Senior Mobile Engineer specialized in Flutter with a deep foundation in native iOS and Android development. I have a proven track record of delivering high-performance applications across various industries, including solid experience in the international financial market. I master reactive programming and Clean Architecture to build robust, scalable products that solve complex business challenges with technical excellence.",
+            "about_edu": "Graduated in Computer Science from UFS.",
+            "skills_title": "Core Expertise",
+            "projects_title": "Strategic Projects",
+            "project_ai_title": "AI Financial Assistant",
+            "project_ai_desc": "Hybrid intelligence security assistant for SMS/Email analysis. Features an offline-first strategy to ensure user privacy, utilizing local processing before cloud fallback.",
+            "project_ai_tech": "Clean Architecture | Riverpod | MethodChannels (Swift/Kotlin) | Offline-First",
+            "project_watch_title": "Movie Catalog (TMDB)",
+            "project_watch_desc": "High-performance theater/streaming catalog. Developed following strict quality standards to ensure a decoupled and maintainable codebase.",
+            "project_watch_tech": "Clean Architecture | MobX | TDD (Unit Tests) | TMDB API | Flutter 3.10+",
+            "project_store_title": "Fake Store E-commerce",
+            "project_store_desc": "Full e-commerce implementation demonstrating UI/UX patterns and reactive state management without heavy dependencies.",
+            "project_store_tech": "Clean Architecture | ValueNotifier | State Pattern | REST API Integration",
+            "project_recipes_title": "Smart Recipes App",
+            "project_recipes_desc": "Interactive recipes platform with real-time sync and robust dependency injection for scalability.",
+            "project_recipes_tech": "MVC Pattern | MobX | Flutter Modular (DI & Routing) | Firebase (Realtime & Cloud Storage)",
+            "contact_title": "Let's Build Something Great",
+            "contact_text": "Available for strategic technical discussions, high-impact collaborations, or new professional challenges.",
+            "view_project": "Technical Deep Dive"
+        },
+        "pt": {
+            "nav_home": "Início",
+            "nav_about": "Sobre",
+            "nav_projects": "Projetos",
+            "nav_contact": "Contato",
+            "hero_title": "Mateus Silva",
+            "hero_subtitle": "Engenheiro Mobile Sênior | Especialista Flutter",
+            "hero_description": "Arquitetando experiências mobile de alta performance e escala com Flutter, Kotlin e Swift.",
+            "about_title": "Sobre Mim",
+            "about_text": "Engenheiro Mobile Sênior especialista em Flutter com sólida experiência em desenvolvimento nativo iOS e Android. Possuo uma trajetória consolidada na entrega de aplicações de alta performance em diversos setores, incluindo sólida experiência no mercado financeiro internacional. Domino programação reativa e Clean Architecture para construir produtos robustos e escaláveis, focando sempre na excelência técnica e na resolução de desafios de negócio complexos.",
+            "about_edu": "Graduado em Ciência da Computação pela UFS.",
+            "skills_title": "Especialidades Core",
+            "projects_title": "Projetos Estratégicos",
+            "project_ai_title": "Assistente Financeiro IA",
+            "project_ai_desc": "Assistente de segurança com inteligência híbrida para análise de SMS/Emails. Estratégia offline-first para privacidade total, processando dados localmente.",
+            "project_ai_tech": "Clean Architecture | Riverpod | MethodChannels (Swift/Kotlin) | Offline-First",
+            "project_watch_title": "Catálogo de Filmes (TMDB)",
+            "project_watch_desc": "Catálogo de alta performance para cinema e streaming. Desenvolvido sob rigorosos padrões de qualidade para um código desacoplado.",
+            "project_watch_tech": "Clean Architecture | MobX | TDD (Testes Unitários) | TMDB API | Flutter 3.10+",
+            "project_store_title": "E-commerce Fake Store",
+            "project_store_desc": "Implementação completa de e-commerce focada em padrões de UI/UX e gerenciamento de estado reativo otimizado.",
+            "project_store_tech": "Clean Architecture | ValueNotifier | State Pattern | Integração API REST",
+            "project_recipes_title": "Catálogo de Receitas",
+            "project_recipes_desc": "Plataforma interativa de receitas com sincronização em tempo real e injeção de dependências robusta para escalabilidade.",
+            "project_recipes_tech": "MVC Pattern | MobX | Flutter Modular (DI & Routing) | Firebase (Database & Storage)",
+            "contact_title": "Vamos Construir Algo Incrível?",
+            "contact_text": "Disponível para discussões técnicas estratégicas, colaborações de alto impacto ou novos desafios profissionais.",
+            "view_project": "Detalhes Técnicos"
         }
+    };
+
+    // i18n Logic
+    const loadLanguage = (lang) => {
+        document.querySelectorAll('[data-i18n]').forEach(element => {
+            const key = element.getAttribute('data-i18n');
+            if (translations[lang][key]) {
+                if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                    element.placeholder = translations[lang][key];
+                } else {
+                    element.textContent = translations[lang][key];
+                }
+            }
+        });
+
+        // Update HTML lang attribute
+        document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+        // Update button text - Show the NEXT language option
+        langToggle.textContent = lang === 'pt' ? 'English' : 'Português';
+        currentLang = lang;
+        
+        // Save preference
+        localStorage.setItem('preferred-lang', lang);
     };
 
     // Toggle click event
@@ -43,11 +98,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (savedLang) {
         loadLanguage(savedLang);
     } else {
-        // Fallback to auto-detect or default
         loadLanguage(currentLang);
     }
 
-    // Scroll Reveal Animation (Simple version using Intersection Observer)
+    // Scroll Reveal Animation
     const observerOptions = {
         threshold: 0.1
     };
@@ -69,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(el);
     });
 
-    // CSS for reveal effect (added dynamically for simplicity or could be in styles.css)
+    // CSS for reveal effect
     const style = document.createElement('style');
     style.textContent = `
         .reveal {
