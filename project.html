@@ -35,182 +35,241 @@
         max-width: 800px;
         margin: 0 auto 2rem;
       }
-      .project-mockup-large {
-        width: 100%;
-        max-width: 900px;
-        height: 500px;
-        margin: 0 auto;
-        border-radius: 20px;
-        background: var(--card-bg);
-        border: 1px solid var(--border-color);
+      
+      .project-gallery-carousel {
         display: flex;
-        align-items: center;
+        gap: 20px;
+        overflow-x: auto;
+        padding: 40px 0;
+        scrollbar-width: thin;
+        scrollbar-color: var(--primary-color) transparent;
         justify-content: center;
+      }
+      .project-gallery-carousel::-webkit-scrollbar {
+        height: 8px;
+      }
+      .project-gallery-carousel::-webkit-scrollbar-thumb {
+        background: var(--primary-color);
+        border-radius: 10px;
+      }
+      
+      .gallery-item {
+        flex: 0 0 auto;
+        width: 320px;
+        height: auto;
+        border-radius: 20px;
         overflow: hidden;
-        position: relative;
-        box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        border: 1px solid var(--border-color);
+        background: #000;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+        transition: transform 0.3s ease;
       }
-      .project-mockup-large img {
+      .gallery-item:hover {
+        transform: scale(1.02);
+      }
+      .gallery-item img {
         width: 100%;
-        height: 100%;
-        object-fit: cover;
-        opacity: 0.8;
+        height: auto;
+        display: block;
+        object-fit: contain;
       }
+
+      .btn-github {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        margin: 20px 0 40px;
+        background: #24292e;
+        color: white;
+        padding: 14px 28px;
+        border-radius: 35px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        border: 1px solid rgba(255,255,255,0.1);
+      }
+      .btn-github:hover {
+        background: var(--primary-color);
+        color: #0d1117;
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(100, 255, 218, 0.2);
+      }
+
       .tech-blueprint {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         gap: 2rem;
         margin: 60px 0;
       }
       .blueprint-item {
         background: var(--card-bg);
-        padding: 2rem;
-        border-radius: 15px;
-        border-left: 4px solid var(--primary-color);
-        transition: transform 0.3s ease;
-      }
-      .blueprint-item:hover {
-        transform: translateY(-5px);
+        padding: 2.5rem;
+        border-radius: 20px;
+        border-top: 4px solid var(--primary-color);
+        box-shadow: var(--card-shadow);
       }
       .blueprint-item h4 {
         color: var(--primary-color);
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.8rem;
         text-transform: uppercase;
-        font-size: 0.9rem;
-        letter-spacing: 1px;
+        font-size: 0.85rem;
+        letter-spacing: 1.5px;
       }
       .blueprint-item p {
         font-size: 1.1rem;
         font-weight: 600;
+        color: var(--text-color);
       }
-      .detail-section {
-        margin: 80px 0;
+      
+      .detail-section { margin: 100px 0; }
+      .detail-section h2 { 
+        font-size: 2.2rem; 
+        margin-bottom: 2.5rem; 
+        display: flex; 
+        align-items: center; 
+        gap: 20px; 
       }
-      .detail-section h2 {
-        font-size: 2rem;
-        margin-bottom: 2rem;
-        display: flex;
-        align-items: center;
-        gap: 15px;
+      .detail-section h2::after { 
+        content: ""; 
+        height: 1px; 
+        flex: 1; 
+        background: linear-gradient(to right, var(--border-color), transparent); 
       }
-      .detail-section h2::after {
-        content: "";
-        height: 2px;
-        flex: 1;
-        background: var(--border-color);
-      }
+      
       .code-display {
         background: #0d1117;
-        padding: 2rem;
-        border-radius: 15px;
+        padding: 2.5rem;
+        border-radius: 20px;
         overflow-x: auto;
-        font-family: 'Courier New', Courier, monospace;
+        font-family: 'Fira Code', 'Courier New', monospace;
         border: 1px solid var(--border-color);
         color: #e6edf3;
-        line-height: 1.6;
+        line-height: 1.7;
+        font-size: 0.95rem;
+        position: relative;
       }
+      .code-display::before {
+        content: "DART / FLUTTER";
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        font-size: 0.7rem;
+        color: var(--secondary-color);
+        letter-spacing: 1px;
+      }
+
       .back-btn {
         position: fixed;
         top: 30px;
         left: 30px;
-        z-index: 100;
-        background: var(--card-bg);
-        padding: 10px 20px;
-        border-radius: 30px;
+        z-index: 1000;
+        background: rgba(17, 34, 64, 0.7);
+        padding: 12px 24px;
+        border-radius: 40px;
         border: 1px solid var(--border-color);
         color: var(--text-color);
         text-decoration: none;
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 12px;
         backdrop-filter: blur(10px);
         transition: all 0.3s ease;
       }
       .back-btn:hover {
         background: var(--primary-color);
-        color: #0d1117;
+        color: #0a192f;
+        border-color: var(--primary-color);
       }
-      .project-gallery {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
+
+      .lang-toggle-overlay {
+        position: fixed;
+        top: 30px;
+        right: 30px;
+        z-index: 1000;
       }
+
       @media (max-width: 768px) {
-        .project-gallery {
-          grid-template-columns: 1fr;
+        .project-gallery-carousel {
+          justify-content: flex-start;
+          padding-left: 20px;
         }
-        .back-btn {
-          top: 15px;
-          left: 15px;
-          padding: 8px 15px;
-        }
+        .gallery-item { width: 280px; }
+        .back-btn { top: 20px; left: 20px; padding: 10px 18px; font-size: 0.9rem; }
+        .lang-toggle-overlay { top: 20px; right: 20px; }
       }
     </style>
   </head>
   <body class="dark-theme">
     <a href="index.html" class="back-btn">
       <i class="fas fa-arrow-left"></i>
-      <span data-i18n="nav_home">Voltar</span>
+      <span data-i18n="p_back">Voltar</span>
     </a>
 
+    <div class="lang-toggle-overlay">
+        <button id="lang-toggle" class="btn-secondary">English</button>
+    </div>
+
     <header class="project-detail-hero">
-      <div class="container">
+      <div class="container slide-up">
         <h1 class="project-detail-title" id="p-title">Project Name</h1>
-        <p class="project-detail-subtitle" id="p-subtitle">A high-level overview of the project and its core mission.</p>
-        <div class="project-mockup-large">
-          <div id="p-mockup-placeholder">Project Visualization</div>
-          <img id="p-mockup-img" src="" alt="Project Mockup" style="display: none;">
+        <p class="project-detail-subtitle" id="p-subtitle">Subtitle</p>
+        
+        <a href="#" id="p-github-link" class="btn-github" target="_blank" style="display: none;">
+            <i class="fab fa-github"></i>
+            <span data-i18n="p_view_code">Ver Código</span>
+        </a>
+
+        <div class="project-gallery-carousel" id="p-gallery">
+          <!-- Dynamically populated carousel -->
         </div>
       </div>
     </header>
 
     <main class="container">
-      <section class="tech-blueprint">
+      <section class="tech-blueprint reveal">
         <div class="blueprint-item">
           <h4 data-i18n="p_arch_label">Arquitetura</h4>
-          <p id="p-architecture">Clean Architecture</p>
+          <p id="p-architecture"></p>
         </div>
         <div class="blueprint-item">
           <h4 data-i18n="p_state_label">Gerenciamento de Estado</h4>
-          <p id="p-state">Riverpod</p>
+          <p id="p-state"></p>
         </div>
         <div class="blueprint-item">
           <h4 data-i18n="p_patterns_label">Padrões Core</h4>
-          <p id="p-patterns">Repository, DI, SOLID</p>
+          <p id="p-patterns"></p>
         </div>
       </section>
 
-      <section class="detail-section">
+      <section class="detail-section reveal">
         <h2 data-i18n="p_overview_label">Resumo do Projeto</h2>
-        <p id="p-description" class="lead">Detailed description goes here...</p>
+        <p id="p-description" class="lead" style="line-height: 1.8; color: var(--secondary-color);"></p>
       </section>
 
-      <section class="detail-section">
-        <h2 data-i18n="p_tech_label">Destaques Técnicos</h2>
-        <p id="p-technical-details">In-depth technical explanation...</p>
+      <section class="detail-section reveal">
+        <h2 data-i18n="p_tech_label">Deep Dive Técnico</h2>
+        <p id="p-technical-details" style="line-height: 1.8; color: var(--secondary-color);"></p>
       </section>
 
-      <section class="detail-section">
+      <section class="detail-section reveal">
         <h2 data-i18n="p_code_label">Implementation Snippet</h2>
         <div class="code-display">
-          <pre id="p-code"><code>// Code example...</code></pre>
+          <pre><code id="p-code"></code></pre>
         </div>
       </section>
     </main>
 
     <footer class="footer">
-      <div class="container" style="text-align: center;">
-        <p class="copyright">&copy; 2026 Mateus Silva. Built with passion.</p>
+      <div class="container" style="text-align: center; opacity: 0.6;">
+        <p class="copyright">&copy; 2026 Mateus Silva. Built with Flutter focus.</p>
       </div>
     </footer>
 
     <script src="script.js"></script>
     <script>
-      // Page-specific initialization
       document.addEventListener('DOMContentLoaded', () => {
         const urlParams = new URLSearchParams(window.location.search);
         const projectId = urlParams.get('id');
-        
         if (projectId && window.initProjectPage) {
           window.initProjectPage(projectId);
         }

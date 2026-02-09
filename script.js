@@ -1,6 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
     const langToggle = document.getElementById('lang-toggle');
-    let currentLang = localStorage.getItem('preferred-lang') || 'pt';
+    
+    // Auto-detect browser language with Portuguese fallback
+    const getInitialLang = () => {
+        const saved = localStorage.getItem('preferred-lang');
+        if (saved) return saved;
+        
+        const browserLang = navigator.language || navigator.userLanguage;
+        if (browserLang.startsWith('en')) return 'en';
+        return 'pt'; // Default fallback
+    };
+
+    let currentLang = getInitialLang();
 
     // Embedded Translations
     const translations = {
@@ -45,6 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
             "p_tech_label": "Technical Deep Dive",
             "p_code_label": "Implementation Strategy",
             "p_back": "Back to Home",
+            "p_view_code": "View Source Code",
 
             "projects_details": {
                 "ai": {
@@ -53,10 +65,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     "arch": "Clean Architecture (Domain/Data/Presentation)",
                     "state": "Riverpod (Asynchronous Data Handling)",
                     "patterns": "MVVM, Repository, DTOs, SOLID, MethodChannels",
+                    "github": "https://github.com/mateuss-silva/ai_assistant",
                     "description": "A sophisticated security tool designed to protect users in the financial sector by analyzing SMS and Email patterns for fraud using hybrid intelligence. The main challenge was balancing high-performance analysis with ironclad user privacy.",
                     "tech_details": "Implemented an 'Offline-First' strategy where primary analysis happens locally on the device. Utilized MethodChannels to bridge Flutter with high-performance native modules: Kotlin with Coroutines for Android and Swift with Combine for iOS. This architecture ensures low latency and maximum reliability in critical scenarios.",
-                    "code_snippet": "// MethodChannel Bridge Example\nstatic const platform = MethodChannel('com.mateussilva.fraud_check/analysis');\n\nFuture<void> analyzeSms(String message) async {\n  try {\n    final Map<dynamic, dynamic> result = await platform.invokeMethod('analyzeMessage', {'text': message});\n    state = AsyncData(AnalysisResult.fromMap(result));\n  } on PlatformException catch (e) {\n    state = AsyncError(e.message, StackTrace.current);\n  }\n}",
-                    "img": "https://raw.githubusercontent.com/mateuss-silva/ai_assistant/master/screenshots/Screenshot_result.png"
+                    "code_snippet": "/// Notifier for managing analysis state (using Riverpod)\nclass AnalysisNotifier extends StateNotifier<AnalysisState> {\n  final Ref _ref;\n  AnalysisNotifier(this._ref) : super(const AnalysisInitial());\n\n  Future<void> analyze(String message) async {\n    state = const AnalysisLoading();\n    final useCase = _ref.read(analyzeMessageUseCaseProvider);\n    final result = await useCase.execute(message);\n\n    state = result.fold(\n      (failure) => AnalysisError(failure),\n      (analysis) => AnalysisSuccess(analysis),\n    );\n  }\n}",
+                    "images": [
+                        "https://raw.githubusercontent.com/mateuss-silva/ai_assistant/master/screenshots/Screenshot_idle.png",
+                        "https://raw.githubusercontent.com/mateuss-silva/ai_assistant/master/screenshots/Screenshot_load.png",
+                        "https://raw.githubusercontent.com/mateuss-silva/ai_assistant/master/screenshots/Screenshot_result.png"
+                    ]
                 },
                 "movies": {
                     "title": "Movie Catalog (TMDB)",
@@ -64,10 +81,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     "arch": "Clean Architecture (Uncle Bob) + TDD",
                     "state": "MobX (Observable Patterns)",
                     "patterns": "TDD, Datasource/Repository, Modular DI",
+                    "github": "https://github.com/mateuss-silva/o-que-assistir",
                     "description": "A high-performance movie catalog powered by the TMDB API. The project's focus was not just on features, but on building a rock-solid, test-driven application that can scale indefinitely with minimal technical debt.",
                     "tech_details": "Developed using a strict TDD approach, reaching 92% test coverage on core features. Architecture follows Reso Coder's Clean Arch approach, strictly decoupling the UI from data sources. This allows for easy swapping of APIs or databases without touching business logic. Utilizes MobX for reactive, predictable state transitions.",
-                    "code_snippet": "// MobX Store with TDD-friendly Repo injection\nabstract class MovieStoreBase with Store {\n  final GetMoviesUsecase _usecase;\n  MovieStoreBase(this._usecase);\n\n  @observable\n  ObservableList<Movie> movies = ObservableList<Movie>();\n\n  @action\n  Future<void> fetchMovies() async {\n    final result = await _usecase(Params());\n    result.fold((failure) => print(failure), (list) => movies.addAll(list));\n  }\n}",
-                    "img": "https://raw.githubusercontent.com/mateuss-silva/o-que-assistir/master/assets/images/home-2.png"
+                    "code_snippet": "/// UseCase implementation for fetching movies (Clean Arch + TDD)\nclass GetMoviesUsecase implements Usecase<List<MovieEntity>, GetMoviesParams> {\n  final MovieRepository repository;\n  GetMoviesUsecase(this.repository);\n\n  @override\n  Future<Either<Failure, List<MovieEntity>>> call(GetMoviesParams params) {\n    return repository.getMovies(category: params.category);\n  }\n}",
+                    "images": [
+                        "https://raw.githubusercontent.com/mateuss-silva/o-que-assistir/main/assets/images/home-1.png",
+                        "https://raw.githubusercontent.com/mateuss-silva/o-que-assistir/main/assets/images/home-2.png",
+                        "https://raw.githubusercontent.com/mateuss-silva/o-que-assistir/main/assets/images/movie-details.png",
+                        "https://raw.githubusercontent.com/mateuss-silva/o-que-assistir/main/assets/images/search.png"
+                    ]
                 },
                 "store": {
                     "title": "Fake Store E-commerce",
@@ -75,10 +98,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     "arch": "Clean Architecture (Simplified)",
                     "state": "ValueNotifier + StatePattern",
                     "patterns": "Repository, Interface Abstraction, Modular DI",
+                    "github": "https://github.com/mateuss-silva/fake-store",
                     "description": "An e-commerce demonstration app focused on smooth UI/UX and efficient state notifications. It aims to show how a complex store can be managed with minimal external dependencies.",
                     "tech_details": "Uses the State Pattern internally to handle loading, success, and error states without the boilerplate of heavy frameworks. This approach keeps the application lightweight and promotes deep understanding of Flutter's reactive core. Modular DI ensures all services are lazily loaded and easily testable.",
-                    "code_snippet": "// State Pattern with ValueNotifier\nabstract class StoreState {}\nclass LoadingState extends StoreState {}\nclass SuccessState extends StoreState { final List<Product> list; SuccessState(this.list); }\n\nclass StoreController extends ValueNotifier<StoreState> {\n  StoreController() : super(LoadingState());\n\n  Future<void> load() async {\n    value = LoadingState();\n    try {\n      final list = await repository.getProducts();\n      value = SuccessState(list);\n    } catch (e) {\n      value = ErrorState(e.toString());\n    }\n  }\n}",
-                    "img": "https://raw.githubusercontent.com/mateuss-silva/fake-store/master/assets/images/prints/products.png"
+                    "code_snippet": "/// Controller using ValueNotifier and StatePattern\nclass ProductsStore extends ValueNotifier<ProductsState> {\n  final GetProductsUsecase _getProductsUsecase;\n  final FilterProductsUsecase _filterProductsUsecase;\n\n  Future<void> getProducts() async {\n    _updateProductsState(ProductsLoadingState());\n    _updateLoadedProducts(await _getProductsUsecase(NoParams()));\n  }\n\n  void _updateLoadedProducts(result) {\n    result.fold(\n      (failure) => _updateProductsState(ProductsErrorState(failure.message)),\n      (products) => _updateProductsState(ProductsLoadedState(products, products)),\n    );\n  }\n}",
+                    "images": [
+                        "https://raw.githubusercontent.com/mateuss-silva/fake-store/main/assets/images/prints/products.png",
+                        "https://raw.githubusercontent.com/mateuss-silva/fake-store/main/assets/images/prints/list-with-favorites.png",
+                        "https://raw.githubusercontent.com/mateuss-silva/fake-store/main/assets/images/prints/details.png",
+                        "https://raw.githubusercontent.com/mateuss-silva/fake-store/main/assets/images/prints/favorites.png"
+                    ]
                 },
                 "recipes": {
                     "title": "Smart Recipes App",
@@ -86,10 +115,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     "arch": "MVC + SOLID Principles",
                     "state": "MobX (Reactive Observables)",
                     "patterns": "Dependency Injection, Firebase Realtime/Storage, Modular",
+                    "github": "https://github.com/mateuss-silva/catalogo-receitas",
                     "description": "A complete recipe management system with real-time synchronization and cloud asset management. Focused on scalability and clean code using SOLID principles.",
                     "tech_details": "Implemented using MVC for clear separation of concerns. Firebase Realtime Database handles live data syncing, while Cloud Storage manages high-resolution culinary imagery. Flutter Modular handles both dependency injection and complex routing, ensuring the app remains maintainable as features grow.",
-                    "code_snippet": "// Firebase + MobX Integration\n@action\nFuture<void> saveRecipe(Recipe recipe) async {\n  final imageUrl = await storage.uploadImage(recipe.imageFile);\n  await database.ref('recipes').push().set(recipe.copyWith(imageUrl: imageUrl).toMap());\n}",
-                    "img": "https://raw.githubusercontent.com/mateuss-silva/gerenciamento-mobx/main/assets/images/home.png"
+                    "code_snippet": "/// product repository using Firebase Realtime Database\nclass ProductRepository implements IProductRepository {\n  final _database = FirebaseDatabase.instance.ref();\n\n  @override\n  Stream<List<Product>> getProducts() {\n    var productsReference = _database.child('products');\n    return productsReference.onValue.map((event) {\n      List<Product> products = [];\n      (event.snapshot.value as Map).forEach((id, productMap) {\n        products.add(Product.fromJson(id, productMap));\n      });\n      return products;\n    });\n  }\n}",
+                    "images": [
+                        "https://raw.githubusercontent.com/mateuss-silva/gerenciamento-mobx/main/assets/images/home.png",
+                        "https://raw.githubusercontent.com/mateuss-silva/gerenciamento-mobx/main/assets/images/details.png",
+                        "https://raw.githubusercontent.com/mateuss-silva/gerenciamento-mobx/main/assets/images/edit.png"
+                    ]
                 }
             }
         },
@@ -134,6 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
             "p_tech_label": "Deep Dive Técnico",
             "p_code_label": "Estratégia de Implementação",
             "p_back": "Voltar para Início",
+            "p_view_code": "Ver Código Fonte",
 
             "projects_details": {
                 "ai": {
@@ -142,10 +177,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     "arch": "Clean Architecture (Domain/Data/Presentation)",
                     "state": "Riverpod (Asynchronous Data Handling)",
                     "patterns": "MVVM, Repository, DTOs, SOLID, MethodChannels",
+                    "github": "https://github.com/mateuss-silva/ai_assistant",
                     "description": "Uma ferramenta de segurança sofisticada projetada para proteger usuários no setor financeiro, analisando padrões de SMS e E-mail em busca de fraudes usando inteligência híbrida. O principal desafio foi equilibrar a análise de alta performance com a privacidade total do usuário.",
                     "tech_details": "Implementada uma estratégia 'Offline-First' onde a análise primária ocorre localmente no dispositivo. Utilizei MethodChannels para conectar o Flutter a módulos nativos de alta performance: Kotlin com Coroutines no Android e Swift com Combine no iOS. Esta arquitetura garante baixa latência e máxima confiabilidade em cenários críticos.",
-                    "code_snippet": "// Exemplo de Ponte MethodChannel\nstatic const platform = MethodChannel('com.mateussilva.fraud_check/analysis');\n\nFuture<void> analyzeSms(String message) async {\n  try {\n    final Map<dynamic, dynamic> result = await platform.invokeMethod('analyzeMessage', {'text': message});\n    state = AsyncData(AnalysisResult.fromMap(result));\n  } on PlatformException catch (e) {\n    state = AsyncError(e.message, StackTrace.current);\n  }\n}",
-                    "img": "https://raw.githubusercontent.com/mateuss-silva/ai_assistant/master/screenshots/Screenshot_result.png"
+                    "code_snippet": "// Monitorando o estado da análise com Riverpod\nclass AnalysisNotifier extends StateNotifier<AnalysisState> {\n  final Ref _ref;\n  AnalysisNotifier(this._ref) : super(const AnalysisInitial());\n\n  /// Analisa uma mensagem para detectar fraude\n  Future<void> analyze(String message) async {\n    state = const AnalysisLoading();\n    final useCase = _ref.read(analyzeMessageUseCaseProvider);\n    final result = await useCase.execute(message);\n\n    state = result.fold(\n      (failure) => AnalysisError(failure),\n      (analysis) => AnalysisSuccess(analysis),\n    );\n  }\n}",
+                    "images": [
+                        "https://raw.githubusercontent.com/mateuss-silva/ai_assistant/master/screenshots/Screenshot_idle.png",
+                        "https://raw.githubusercontent.com/mateuss-silva/ai_assistant/master/screenshots/Screenshot_load.png",
+                        "https://raw.githubusercontent.com/mateuss-silva/ai_assistant/master/screenshots/Screenshot_result.png"
+                    ]
                 },
                 "movies": {
                     "title": "Catálogo de Filmes (TMDB)",
@@ -153,10 +193,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     "arch": "Clean Architecture (Uncle Bob) + TDD",
                     "state": "MobX (Observable Patterns)",
                     "patterns": "TDD, Datasource/Repository, Modular DI",
+                    "github": "https://github.com/mateuss-silva/o-que-assistir",
                     "description": "Um catálogo de filmes de alta performance alimentado pela API TMDB. O foco do projeto não foi apenas funcionalidades, mas a construção de uma aplicação robusta guiada por testes, capaz de escalar indefinidamente com dívida técnica mínima.",
                     "tech_details": "Desenvolvido com uma abordagem rigorosa de TDD, atingindo 92% de cobertura de testes nas funcionalidades core. A arquitetura segue a abordagem Clean Arch do Reso Coder, desacoplando estritamente a UI das fontes de dados. Isso permite a troca fácil de APIs ou bancos de dados sem tocar na lógica de negócio. Utiliza MobX para transições de estado reativas e previsíveis.",
-                    "code_snippet": "// Store MobX com injeção de Repo amigável a testes\nabstract class MovieStoreBase with Store {\n  final GetMoviesUsecase _usecase;\n  MovieStoreBase(this._usecase);\n\n  @observable\n  ObservableList<Movie> movies = ObservableList<Movie>();\n\n  @action\n  Future<void> fetchMovies() async {\n    final result = await _usecase(Params());\n    result.fold((failure) => print(failure), (list) => movies.addAll(list));\n  }\n}",
-                    "img": "https://raw.githubusercontent.com/mateuss-silva/o-que-assistir/master/assets/images/home-2.png"
+                    "code_snippet": "/// Implementação de UseCase para buscar filmes (Clean Arch + TDD)\nclass GetMoviesUsecase implements Usecase<List<MovieEntity>, GetMoviesParams> {\n  final MovieRepository repository;\n  GetMoviesUsecase(this.repository);\n\n  @override\n  Future<Either<Failure, List<MovieEntity>>> call(GetMoviesParams params) {\n    return repository.getMovies(category: params.category);\n  }\n}",
+                    "images": [
+                        "https://raw.githubusercontent.com/mateuss-silva/o-que-assistir/main/assets/images/home-1.png",
+                        "https://raw.githubusercontent.com/mateuss-silva/o-que-assistir/main/assets/images/home-2.png",
+                        "https://raw.githubusercontent.com/mateuss-silva/o-que-assistir/main/assets/images/movie-details.png",
+                        "https://raw.githubusercontent.com/mateuss-silva/o-que-assistir/main/assets/images/search.png"
+                    ]
                 },
                 "store": {
                     "title": "E-commerce Fake Store",
@@ -164,10 +210,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     "arch": "Clean Architecture (Simplified)",
                     "state": "ValueNotifier + StatePattern",
                     "patterns": "Repository, Interface Abstraction, Modular DI",
+                    "github": "https://github.com/mateuss-silva/fake-store",
                     "description": "Um app de demonstração de e-commerce focado em UI/UX fluida e notificações de estado eficientes. O objetivo é mostrar como uma loja complexa pode ser gerenciada com o mínimo de dependências externas.",
                     "tech_details": "Utiliza o State Pattern internamente para gerenciar estados de carregamento, sucesso e erro sem o boilerplate de frameworks pesados. Esta abordagem mantém a aplicação leve e promove um entendimento profundo do núcleo reativo do Flutter. Modular DI garante que todos os serviços sejam carregados sob demanda e sejam facilmente testáveis.",
-                    "code_snippet": "// State Pattern com ValueNotifier\nabstract class StoreState {}\nclass LoadingState extends StoreState {}\nclass SuccessState extends StoreState { final List<Product> list; SuccessState(this.list); }\n\nclass StoreController extends ValueNotifier<StoreState> {\n  StoreController() : super(LoadingState());\n\n  Future<void> load() async {\n    value = LoadingState();\n    try {\n      final list = await repository.getProducts();\n      value = SuccessState(list);\n    } catch (e) {\n      value = ErrorState(e.toString());\n    }\n  }\n}",
-                    "img": "https://raw.githubusercontent.com/mateuss-silva/fake-store/master/assets/images/prints/products.png"
+                    "code_snippet": "/// Controller usando ValueNotifier e StatePattern\nclass ProductsStore extends ValueNotifier<ProductsState> {\n  final GetProductsUsecase _getProductsUsecase;\n  final FilterProductsUsecase _filterProductsUsecase;\n\n  Future<void> getProducts() async {\n    _updateProductsState(ProductsLoadingState());\n    _updateLoadedProducts(await _getProductsUsecase(NoParams()));\n  }\n\n  void _updateLoadedProducts(result) {\n    result.fold(\n      (failure) => _updateProductsState(ProductsErrorState(failure.message)),\n      (products) => _updateProductsState(ProductsLoadedState(products, products)),\n    );\n  }\n}",
+                    "images": [
+                        "https://raw.githubusercontent.com/mateuss-silva/fake-store/main/assets/images/prints/products.png",
+                        "https://raw.githubusercontent.com/mateuss-silva/fake-store/main/assets/images/prints/list-with-favorites.png",
+                        "https://raw.githubusercontent.com/mateuss-silva/fake-store/main/assets/images/prints/details.png",
+                        "https://raw.githubusercontent.com/mateuss-silva/fake-store/main/assets/images/prints/favorites.png"
+                    ]
                 },
                 "recipes": {
                     "title": "Catálogo de Receitas",
@@ -175,10 +227,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     "arch": "MVC + Princípios SOLID",
                     "state": "MobX (Reactive Observables)",
                     "patterns": "Injeção de Dependência, Firebase Realtime/Storage, Modular",
+                    "github": "https://github.com/mateuss-silva/catalogo-receitas",
                     "description": "Um sistema completo de gerenciamento de receitas com sincronização em tempo real e gerenciamento de arquivos na nuvem. Focado em escalabilidade e código limpo usando princípios SOLID.",
                     "tech_details": "Implementado usando MVC para uma clara separação de responsabilidades. O Firebase Realtime Database lida com a sincronização de dados ao vivo, enquanto o Cloud Storage gerencia imagens culinárias de alta resolução. O Flutter Modular gerencia tanto a injeção de dependência quanto o roteamento complexo, garantindo que o app permaneça sustentável à medida que as funcionalidades crescem.",
-                    "code_snippet": "// Integração Firebase + MobX\n@action\nFuture<void> saveRecipe(Recipe recipe) async {\n  final imageUrl = await storage.uploadImage(recipe.imageFile);\n  await database.ref('recipes').push().set(recipe.copyWith(imageUrl: imageUrl).toMap());\n}",
-                    "img": "https://raw.githubusercontent.com/mateuss-silva/gerenciamento-mobx/main/assets/images/home.png"
+                    "code_snippet": "/// Repositório de produtos consumindo Firebase Realtime Database\nclass ProductRepository implements IProductRepository {\n  final _database = FirebaseDatabase.instance.ref();\n\n  @override\n  Stream<List<Product>> getProducts() {\n    var productsReference = _database.child('products');\n    return productsReference.onValue.map((event) {\n      List<Product> products = [];\n      (event.snapshot.value as Map).forEach((id, productMap) {\n        products.add(Product.fromJson(id, productMap));\n      });\n      return products;\n    });\n  }\n}",
+                    "images": [
+                        "https://raw.githubusercontent.com/mateuss-silva/gerenciamento-mobx/main/assets/images/home.png",
+                        "https://raw.githubusercontent.com/mateuss-silva/gerenciamento-mobx/main/assets/images/details.png",
+                        "https://raw.githubusercontent.com/mateuss-silva/gerenciamento-mobx/main/assets/images/edit.png"
+                    ]
                 }
             }
         }
@@ -199,11 +256,26 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('p-technical-details').textContent = project.tech_details;
         document.getElementById('p-code').textContent = project.code_snippet;
         
-        const img = document.getElementById('p-mockup-img');
-        if (project.img) {
-            img.src = project.img;
-            img.style.display = 'block';
-            document.getElementById('p-mockup-placeholder').style.display = 'none';
+        // Update GitHub Link
+        const githubBtn = document.getElementById('p-github-link');
+        if (githubBtn && project.github) {
+            githubBtn.href = project.github;
+            githubBtn.style.display = 'inline-flex';
+        }
+
+        // Multiple Image Support (Gallery)
+        const gallery = document.getElementById('p-gallery');
+        if (gallery && project.images) {
+            gallery.innerHTML = '';
+            project.images.forEach(imgUrl => {
+                const imgWrap = document.createElement('div');
+                imgWrap.className = 'gallery-item';
+                const img = document.createElement('img');
+                img.src = imgUrl;
+                img.alt = project.title;
+                imgWrap.appendChild(img);
+                gallery.appendChild(imgWrap);
+            });
         }
     };
 
@@ -211,7 +283,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const loadLanguage = (lang) => {
         document.querySelectorAll('[data-i18n]').forEach(element => {
             const key = element.getAttribute('data-i18n');
-            if (translations[lang][key]) {
+            if (translations[lang] && translations[lang][key]) {
                 if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
                     element.placeholder = translations[lang][key];
                 } else {
@@ -224,7 +296,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const urlParams = new URLSearchParams(window.location.search);
         const projectId = urlParams.get('id');
         if (projectId && window.initProjectPage) {
-            currentLang = lang; // Ensure global state is updated before init
+            currentLang = lang;
             window.initProjectPage(projectId);
         }
 
@@ -239,10 +311,9 @@ document.addEventListener('DOMContentLoaded', () => {
         loadLanguage(nextLang);
     });
 
-    const savedLang = localStorage.getItem('preferred-lang');
-    loadLanguage(savedLang || 'pt');
+    loadLanguage(currentLang);
 
-    // Scroll Reveal (only for index.html basically)
+    // Scroll Reveal
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
