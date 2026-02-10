@@ -54,7 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
             "p_patterns_label": "Core Patterns",
             "p_overview_label": "Project Overview",
             "p_tech_label": "Technical Deep Dive",
-            "p_code_label": "Implementation Strategy",
             "p_back": "Back to Home",
             "p_view_code": "View Source Code",
             "p_demo_label": "Interactive Demo",
@@ -86,7 +85,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     "github": "https://github.com/mateuss-silva/o-que-assistir",
                     "description": "A high-performance movie catalog powered by the TMDB API. The project's focus was not just on features, but on building a rock-solid, test-driven application that can scale indefinitely with minimal technical debt.",
                     "tech_details": "Developed using a strict TDD approach, reaching 92% test coverage on core features. Architecture follows Reso Coder's Clean Arch approach, strictly decoupling the UI from data sources. This allows for easy swapping of APIs or databases without touching business logic. Utilizes MobX for reactive, predictable state transitions.",
-                    "code_snippet": "/// UseCase implementation for fetching movies (Clean Arch + TDD)\nclass GetMoviesUsecase implements Usecase<List<MovieEntity>, GetMoviesParams> {\n  final MovieRepository repository;\n  GetMoviesUsecase(this.repository);\n\n  @override\n  Future<Either<Failure, List<MovieEntity>>> call(GetMoviesParams params) {\n    return repository.getMovies(category: params.category);\n  }\n}",
                     "images": [
                         "https://raw.githubusercontent.com/mateuss-silva/o-que-assistir/main/assets/images/home-1.png",
                         "https://raw.githubusercontent.com/mateuss-silva/o-que-assistir/main/assets/images/home-2.png",
@@ -103,7 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     "github": "https://github.com/mateuss-silva/fake-store",
                     "description": "An e-commerce demonstration app focused on smooth UI/UX and efficient state notifications. It aims to show how a complex store can be managed with minimal external dependencies.",
                     "tech_details": "Uses the State Pattern internally to handle loading, success, and error states without the boilerplate of heavy frameworks. This approach keeps the application lightweight and promotes deep understanding of Flutter's reactive core. Modular DI ensures all services are lazily loaded and easily testable.",
-                    "code_snippet": "/// Controller using ValueNotifier and StatePattern\nclass ProductsStore extends ValueNotifier<ProductsState> {\n  final GetProductsUsecase _getProductsUsecase;\n  final FilterProductsUsecase _filterProductsUsecase;\n\n  Future<void> getProducts() async {\n    _updateProductsState(ProductsLoadingState());\n    _updateLoadedProducts(await _getProductsUsecase(NoParams()));\n  }\n\n  void _updateLoadedProducts(result) {\n    result.fold(\n      (failure) => _updateProductsState(ProductsErrorState(failure.message)),\n      (products) => _updateProductsState(ProductsLoadedState(products, products)),\n    );\n  }\n}",
                     "images": [
                         "https://raw.githubusercontent.com/mateuss-silva/fake-store/main/assets/images/prints/products.png",
                         "https://raw.githubusercontent.com/mateuss-silva/fake-store/main/assets/images/prints/list-with-favorites.png",
@@ -120,7 +117,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     "github": "https://github.com/mateuss-silva/catalogo-receitas",
                     "description": "A complete recipe management system with real-time synchronization and cloud asset management. Focused on scalability and clean code using SOLID principles.",
                     "tech_details": "Implemented using MVC for clear separation of concerns. Firebase Realtime Database handles live data syncing, while Cloud Storage manages high-resolution culinary imagery. Flutter Modular handles both dependency injection and complex routing, ensuring the app remains maintainable as features grow.",
-                    "code_snippet": "/// product repository using Firebase Realtime Database\nclass ProductRepository implements IProductRepository {\n  final _database = FirebaseDatabase.instance.ref();\n\n  @override\n  Stream<List<Product>> getProducts() {\n    var productsReference = _database.child('products');\n    return productsReference.onValue.map((event) {\n      List<Product> products = [];\n      (event.snapshot.value as Map).forEach((id, productMap) {\n        products.add(Product.fromJson(id, productMap));\n      });\n      return products;\n    });\n  }\n}",
                     "images": [
                         "https://raw.githubusercontent.com/mateuss-silva/gerenciamento-mobx/main/assets/images/home.png",
                         "https://raw.githubusercontent.com/mateuss-silva/gerenciamento-mobx/main/assets/images/details.png",
@@ -168,7 +164,6 @@ document.addEventListener('DOMContentLoaded', () => {
             "p_patterns_label": "Padrões Core",
             "p_overview_label": "Resumo do Projeto",
             "p_tech_label": "Deep Dive Técnico",
-            "p_code_label": "Estratégia de Implementação",
             "p_back": "Voltar para Início",
             "p_view_code": "Ver Código Fonte",
             "p_demo_label": "Demo Interativa",
@@ -184,7 +179,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     "demo_url": "https://mateuss-silva.github.io/ai_assistant/",
                     "description": "Uma ferramenta de segurança sofisticada projetada para proteger usuários no setor financeiro, analisando padrões de SMS e E-mail em busca de fraudes usando inteligência híbrida. O principal desafio foi equilibrar a análise de alta performance com a privacidade total do usuário.",
                     "tech_details": "O sistema foi concebido para resolver o trade-off entre <strong>privacidade total</strong> e <strong>poder de processamento em nuvem</strong>, utilizando uma estratégia de <strong>Inteligência Híbrida</strong>:<br><br><ul><li><strong>Machine Learning On-Device:</strong> No Android, implementei a inferência local via <strong>TensorFlow Lite</strong>. O diferencial está no modelo customizado que embarca a lógica de <strong>Text Vectorization</strong>, permitindo que o processamento de linguagem natural ocorra sem dependências externas, garantindo latência zero e privacidade de dados sensíveis.</li><li><strong>Ponte Nativa de Alta Performance:</strong> Utilizei <strong>MethodChannels</strong> para comunicação bidirecional otimizada. No Android, o código nativo faz uso de <strong>Kotlin Coroutines e StateFlow</strong> para reatividade assíncrona. No iOS, adotei o <strong>Combine Framework</strong>, demonstrando proficiência em stacks nativas modernas para processamento em background.</li><li><strong>Fallback Inteligente (DevSecOps):</strong> Em casos de alta complexidade, o sistema escala automaticamente para o <strong>Google Gemini 2.5 Flash</strong>. Esta transição é gerenciada por uma camada de dados robusta que utiliza <strong>Riverpod</strong> para reatividade e <strong>GitHub Secrets</strong> para garantir que credenciais sensíveis nunca toquem o sistema de arquivos público, uma prática essencial de <strong>DevSecOps</strong>.</li><li><strong>Arquitetura Limpa (Clean Arch):</strong> Separação rigorosa de interesses entre camadas de Entidade, UseCase e Repositório, facilitando a testabilidade unitária com <strong>Mocktail</strong> e garantindo que o núcleo do negócio seja agnóstico a frameworks.</li></ul>",
-                    "code_snippet": "// Monitorando o estado da análise com Riverpod\nclass AnalysisNotifier extends StateNotifier<AnalysisState> {\n  final Ref _ref;\n  AnalysisNotifier(this._ref) : super(const AnalysisInitial());\n\n  /// Analisa uma mensagem para detectar fraude\n  Future<void> analyze(String message) async {\n    state = const AnalysisLoading();\n    final useCase = _ref.read(analyzeMessageUseCaseProvider);\n    final result = await useCase.execute(message);\n\n    state = result.fold(\n      (failure) => AnalysisError(failure),\n      (analysis) => AnalysisSuccess(analysis),\n    );\n  }\n}",
                     "images": [
                         "https://raw.githubusercontent.com/mateuss-silva/ai_assistant/master/screenshots/Screenshot_idle.png",
                         "https://raw.githubusercontent.com/mateuss-silva/ai_assistant/master/screenshots/Screenshot_load.png",
@@ -200,7 +194,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     "github": "https://github.com/mateuss-silva/o-que-assistir",
                     "description": "Um catálogo de filmes de alta performance alimentado pela API TMDB. O foco do projeto não foi apenas funcionalidades, mas a construção de uma aplicação robusta guiada por testes, capaz de escalar indefinidamente com dívida técnica mínima.",
                     "tech_details": "Desenvolvido com uma abordagem rigorosa de TDD, atingindo 92% de cobertura de testes nas funcionalidades core. A arquitetura segue a abordagem Clean Arch do Reso Coder, desacoplando estritamente a UI das fontes de dados. Isso permite a troca fácil de APIs ou bancos de dados sem tocar na lógica de negócio. Utiliza MobX para transições de estado reativas e previsíveis.",
-                    "code_snippet": "/// Implementação de UseCase para buscar filmes (Clean Arch + TDD)\nclass GetMoviesUsecase implements Usecase<List<MovieEntity>, GetMoviesParams> {\n  final MovieRepository repository;\n  GetMoviesUsecase(this.repository);\n\n  @override\n  Future<Either<Failure, List<MovieEntity>>> call(GetMoviesParams params) {\n    return repository.getMovies(category: params.category);\n  }\n}",
                     "images": [
                         "https://raw.githubusercontent.com/mateuss-silva/o-que-assistir/main/assets/images/home-1.png",
                         "https://raw.githubusercontent.com/mateuss-silva/o-que-assistir/main/assets/images/home-2.png",
@@ -234,7 +227,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     "github": "https://github.com/mateuss-silva/catalogo-receitas",
                     "description": "Um sistema completo de gerenciamento de receitas com sincronização em tempo real e gerenciamento de arquivos na nuvem. Focado em escalabilidade e código limpo usando princípios SOLID.",
                     "tech_details": "Implementado usando MVC para uma clara separação de responsabilidades. O Firebase Realtime Database lida com a sincronização de dados ao vivo, enquanto o Cloud Storage gerencia imagens culinárias de alta resolução. O Flutter Modular gerencia tanto a injeção de dependência quanto o roteamento complexo, garantindo que o app permaneça sustentável à medida que as funcionalidades crescem.",
-                    "code_snippet": "/// Repositório de produtos consumindo Firebase Realtime Database\nclass ProductRepository implements IProductRepository {\n  final _database = FirebaseDatabase.instance.ref();\n\n  @override\n  Stream<List<Product>> getProducts() {\n    var productsReference = _database.child('products');\n    return productsReference.onValue.map((event) {\n      List<Product> products = [];\n      (event.snapshot.value as Map).forEach((id, productMap) {\n        products.add(Product.fromJson(id, productMap));\n      });\n      return products;\n    });\n  }\n}",
                     "images": [
                         "https://raw.githubusercontent.com/mateuss-silva/gerenciamento-mobx/main/assets/images/home.png",
                         "https://raw.githubusercontent.com/mateuss-silva/gerenciamento-mobx/main/assets/images/details.png",
@@ -258,7 +250,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('p-patterns').textContent = project.patterns;
         document.getElementById('p-description').innerHTML = project.description;
         document.getElementById('p-technical-details').innerHTML = project.tech_details;
-        document.getElementById('p-code').textContent = project.code_snippet;
         
         // Update GitHub Link
         const githubBtn = document.getElementById('p-github-link');
