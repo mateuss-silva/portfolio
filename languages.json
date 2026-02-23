@@ -13,6 +13,10 @@
     "skills_title": "Core Expertise",
     "projects_title": "Strategic Projects",
     
+    "project_guard_title": "Guardian Invest",
+    "project_guard_desc": "Premium fintech platform focused on uncompromising security. Features real-time trading, biometric verification, and advanced session protection.",
+    "project_guard_tech": "Clean Architecture | Flutter BLoC | RxDart Streams | JWT Rotation | Fastify",
+
     "project_ai_title": "AI Financial Assistant",
     "project_ai_desc": "Hybrid intelligence security assistant for SMS/Email analysis. Features an offline-first strategy to ensure user privacy, utilizing local processing before cloud fallback.",
     "project_ai_tech": "Clean Architecture | Riverpod | MethodChannels (Swift/Kotlin) | Offline-First",
@@ -43,6 +47,22 @@
     "p_demo_label": "Interactive Demo",
 
     "projects_details": {
+      "guard": {
+        "title": "Guardian Invest",
+        "subtitle": "Premium, secure fintech application designed as a financial fortress.",
+        "arch": "Clean Architecture (Data/Domain/Presentation)",
+        "state": "Flutter BLoC + RxDart Streams",
+        "patterns": "Repository, Dependency Injection (GetIt), Interceptor Pattern (Dio)",
+        "github": "https://github.com/mateuss-silva/fintech_session_guard",
+        "demo_url": "https://mateuss-silva.github.io/fintech_session_guard",
+        "description": "Guardian Invest is a mission-critical fintech solution. It enables real-time portfolio management, trading, and secure transactions, all while being protected by biometric verification and advanced session management logic.",
+        "tech_details": "Key technical highlights: <ul><li><strong>Advanced Security:</strong> Implemented short-lived <strong>JWT rotation</strong> with reuse detection to prevent session hijacking. All sensitive data is stored in the native secure enclave.</li><li><strong>Reactive Trading Flow:</strong> Real-time asset pricing powered by <strong>RxDart Streams</strong> and <strong>Fastify (Node.js)</strong> backend, ensuring minimal latency.</li><li><strong>Clean Architecture:</strong> Strict adherence to domain-driven design, decoupling business logic from the UI framework for 100% testability.</li><li><strong>Production-Ready CI/CD:</strong> Fully automated web deployment to <strong>GitHub Pages</strong> with a containerized <strong>Render</strong> backend.</li></ul>",
+        "images": [
+            "https://raw.githubusercontent.com/mateuss-silva/fintech_session_guard/master/assets/images/home.png",
+            "https://raw.githubusercontent.com/mateuss-silva/fintech_session_guard/master/assets/images/graph.png",
+            "https://raw.githubusercontent.com/mateuss-silva/fintech_session_guard/master/assets/images/graph-details.png"
+        ]
+      },
       "ai": {
         "title": "AI Financial Assistant",
         "subtitle": "Mission-critical security assistant for financial data protection.",
@@ -122,6 +142,10 @@
     "skills_title": "Especialidades Core",
     "projects_title": "Projetos Estratégicos",
     
+    "project_guard_title": "Guardian Invest",
+    "project_guard_desc": "Plataforma fintech premium focada em segurança intransigente. Inclui trading em tempo real, biometria e proteção de sessão avançada.",
+    "project_guard_tech": "Clean Architecture | Flutter BLoC | RxDart Streams | Rotação JWT | Fastify",
+
     "project_ai_title": "Assistente Financeiro IA",
     "project_ai_desc": "Assistente de segurança com inteligência híbrida para análise de SMS/Emails. Estratégia offline-first para privacidade total, processando dados localmente.",
     "project_ai_tech": "Clean Architecture | Riverpod | MethodChannels (Swift/Kotlin) | Offline-First",
@@ -152,6 +176,22 @@
     "p_demo_label": "Demo Interativa",
 
     "projects_details": {
+      "guard": {
+        "title": "Guardian Invest",
+        "subtitle": "Aplicação fintech premium e segura, desenhada como uma fortaleza financeira.",
+        "arch": "Clean Architecture (Data/Domain/Presentation)",
+        "state": "Flutter BLoC + RxDart Streams",
+        "patterns": "Repository, Dependency Injection (GetIt), Interceptor Pattern (Dio)",
+        "github": "https://github.com/mateuss-silva/fintech_session_guard",
+        "demo_url": "https://mateuss-silva.github.io/fintech_session_guard",
+        "description": "O Guardian Invest é uma solução fintech de missão crítica. Permite gerenciamento de carteira em tempo real, negociação e transações seguras, tudo protegido por verificação biométrica e lógica avançada de gerenciamento de sessão.",
+        "tech_details": "Destaques técnicos: <ul><li><strong>Segurança Avançada:</strong> Implementação de <strong>rotação de JWT</strong> de curta duração com detecção de reuso para prevenir sequestro de sessão. Dados sensíveis armazenados em enclave seguro nativo.</li><li><strong>Fluxo de Trade Reativo:</strong> Preços de ativos em tempo real via <strong>RxDart Streams</strong> e backend <strong>Fastify (Node.js)</strong>, garantindo latência mínima.</li><li><strong>Clean Architecture:</strong> Adesão rigorosa ao design orientado a domínio, desacoplando a lógica de negócio do framework UI para 100% de testabilidade.</li><li><strong>CI/CD Pronto para Produção:</strong> Deploy web automatizado para <strong>GitHub Pages</strong> com backend <strong>Render</strong>.</li></ul>",
+        "images": [
+            "https://raw.githubusercontent.com/mateuss-silva/fintech_session_guard/master/assets/images/home.png",
+            "https://raw.githubusercontent.com/mateuss-silva/fintech_session_guard/master/assets/images/graph.png",
+            "https://raw.githubusercontent.com/mateuss-silva/fintech_session_guard/master/assets/images/graph-details.png"
+        ]
+      },
       "ai": {
         "title": "Assistente Financeiro IA",
         "subtitle": "Assistente de segurança de missão crítica para proteção de dados financeiros.",
